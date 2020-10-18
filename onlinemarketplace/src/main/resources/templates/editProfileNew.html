@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <title>Mum Express</title>
+    <!--/tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!--//tags -->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet">
+    <!--pop-up-box-->
+    <link th:href="@{/css/popuo-box.css}" rel="stylesheet" type="text/css" media="all"/>
+    <!--//pop-up-box-->
+    <!-- price range -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui1.css}">
+    <!-- fonts -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800}" rel="stylesheet">
+    <link href="@{/fonts/FontAwesome.otf}">
+</head>
+
+<body>
+
+<!-- HEADER STARTS-->
+
+<!-- MUM EXPRESS AND LOGO -->
+<div class="header-bot">
+    <div class="header-bot_inner_wthreeinfo_header_mid">
+        <!-- header-bot-->
+        <div class="col-md-4 logo_agile">
+            <h1>
+                <a th:href="@{/}">
+                    <span>M</span>UM
+                    <span>E</span>XPRESS
+                    <img th:src="@{/img/logo2.png}" alt=" ">
+                </a>
+            </h1>
+        </div>
+
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!-- MUM EXPRESS AND LOGO -->
+
+<!-- AUTHORIZATION AND NAV LINK -->
+<div class="ban-top">
+    <div class="container">
+        <div class="top_nav_left">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1"
+                                aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
+                        <ul sec:authorize="!(isAuthenticated())" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/login}"><span class="fa fa-unlock-alt"
+                                                                                   aria-hidden="true"></span> Login</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/register_input}"><span
+                                        class="fa fa-pencil-square-o" aria-hidden="true"></span> Sign up</a>
+                            </li>
+                        </ul>
+                        <ul sec:authorize="hasAuthority('SELLER')" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/products}"><i class="fa fa-cubes"></i> Products</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/seller/orders}"><i class="fa fa-file-text-o"></i>
+                                    Orders</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/users/followerList}"><i class="fa fa-users"></i>
+                                    Followers</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/profile/{id} (id = ${session.user.id})}"><i
+                                        class="fa fa-user-circle-o"></i> Profile</a>
+                            </li>
+                            <li class="">
+                                <form action="#" th:action="@{/logout}" method="post">
+                                    <input type="submit" class="btn btn-danger btn-logoff" value="Logout" />
+                                </form>
+                            </li>
+                        </ul>
+                        <ul sec:authorize="hasAuthority('BUYER')" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/buyer/cart}"><i class="fa fa-shopping-cart"
+                                                                                     aria-hidden="true"></i>
+                                    Cart</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/profile/{id} (id = ${session.user.id})}"><i
+                                        class="fa fa-user-circle-o"></i> Profile</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/buyer/orders}"><i class="fa fa-file-text-o"></i>
+                                    Orders</a>
+                            </li>
+                            <li class="">
+                                <form action="#" th:action="@{/logout}" method="post">
+                                    <input type="submit" class="btn btn-danger btn-logoff" value="Logout" />
+                                </form>
+                            </li>
+                        </ul>
+                        <ul sec:authorize="hasAuthority('ADMIN')" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/admin/users/SellerList}"><i
+                                        class="fa fa-user-circle-o"></i> Admin Page</a>
+                            </li>
+                            <li class="">
+                                <form action="#" th:action="@{/logout}" method="post">
+                                    <input type="submit" class="btn btn-danger btn-logoff" value="Logout" />
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- AUTHORIZATION AND NAV LINK -->
+
+
+<!-- HEADER ENDS-->
+
+
+<div class="contact-w3l">
+    <div class="container">
+        <!-- tittle heading -->
+        <h3 class="tittle-w3l">Edit Profile
+            <span class="heading-style">
+					<i></i>
+					<i></i>
+					<i></i>
+				</span>
+        </h3>
+        <!-- //tittle heading -->
+        <!-- contact -->
+        <div class="contact agileits">
+            <div class="contact-agileinfo">
+                <div class="contact-form wthree">
+                    <form th:action="@{/profile/{id}/update(id=${user.id})}" th:object="${user}" method="post">
+                        <div class="">
+                            <label>Full Name</label><br/>
+                            <input type="text" th:field="*{name}" placeholder="Full name">
+                            <p th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}"
+                               th:errorclass="fieldError">Error</p>
+                        </div>
+                        <div class="">
+                            <label>Shipping State</label><br/>
+                            <input type="text" th:field="*{shippingAddress.state}" placeholder="Shipping State">
+                            <p th:if="${#fields.hasErrors('shippingAddress.state')}" class="error" th:errors="*{shippingAddress.state}"
+                               th:errorclass="fieldError">Error</p>
+                        </div>
+                        <div class="">
+                            <label>Shipping ZipCode</label><br/>
+                            <input type="text" th:field="*{shippingAddress.zipCode}" id="zipCode">
+                            <p th:if="${#fields.hasErrors('shippingAddress.zipCode')}" class="error" th:errors="*{shippingAddress.zipCode}"
+                               th:errorclass="fieldError">Error</p>
+                        </div>
+                        <div class="">
+                            <label>Shipping City</label><br/>
+                            <input type="text" th:field="*{shippingAddress.city}" id="city" placeholder="Shipping City">
+                            <p th:if="${#fields.hasErrors('shippingAddress.city')}" class="error" th:errors="*{shippingAddress.city}"
+                               th:errorclass="fieldError">Error</p>
+                        </div>
+                        <div class="">
+                            <label>Shipping Street</label><br/>
+                            <input type="text" th:field="*{shippingAddress.street}" id="street"
+                                   placeholder="Shipping street">
+                            <p th:if="${#fields.hasErrors('shippingAddress.street')}" class="error" th:errors="*{shippingAddress.street}"
+                               th:errorclass="fieldError">Error</p>
+                        </div>
+                        <div class="">
+                            <label>Billing State</label><br/>
+                            <input type="text" th:field="*{billingAddress.state}" placeholder="Shipping State">
+                            <p th:if="${#fields.hasErrors('billingAddress.state')}" class="error" th:errors="*{billingAddress.state}"
+                               th:errorclass="fieldError">Error</p>
+                        </div>
+                        <div class="">
+                            <label>Billing ZipCode</label><br/>
+                            <input type="text" th:field="*{billingAddress.zipCode}">
+                            <p th:if="${#fields.hasErrors('billingAddress.zipCode')}" class="error" th:errors="*{billingAddress.zipCode}"
+                               th:errorclass="fieldError">Error</p>
+                        </div>
+                        <div class="">
+                            <label>Billing City</label><br/>
+                            <input type="text" th:field="*{billingAddress.city}" placeholder="Shipping City">
+                            <p th:if="${#fields.hasErrors('billingAddress.city')}" class="error" th:errors="*{billingAddress.city}"
+                               th:errorclass="fieldError">Error</p>
+                        </div>
+                        <div class="">
+                            <label>Billing Street</label><br/>
+                            <input type="text" th:field="*{billingAddress.street}"
+                                   placeholder="Shipping street">
+                            <p th:if="${#fields.hasErrors('billingAddress.street')}" class="error" th:errors="*{billingAddress.street}"
+                               th:errorclass="fieldError">Error</p>
+                        </div>
+
+                         <div class="">
+                            <label>Credit Number</label><br/>
+                            <input type="text" th:field="*{creditCard.number}"
+                                   placeholder="Shipping street">
+                            <p th:if="${#fields.hasErrors('creditCard.number')}" class="error" th:errors="*{creditCard.number}"
+                               th:errorclass="fieldError">Error</p>
+                        </div>
+
+                        <div class="">
+                            <label>Credit Name</label><br/>
+                            <input type="text" th:field="*{creditCard.name}"
+                                   placeholder="Shipping street">
+                            <p th:if="${#fields.hasErrors('creditCard.name')}" class="error" th:errors="*{creditCard.name}"
+                               th:errorclass="fieldError">Error</p>
+                        </div>
+
+                          <div class="">
+                            <label>Credit Card Validity</label><br/>
+                            <input type="text" th:field="*{creditCard.validDate}"
+                                   placeholder="Shipping street">
+                            <p th:if="${#fields.hasErrors('creditCard.validDate')}" class="error" th:errors="*{creditCard.validDate}"
+                               th:errorclass="fieldError">Error</p>
+                        </div>
+
+                        <input type="hidden" value="" th:field="*{email}" th:value="${user.email}">
+                        <input type="hidden" value="" th:field="*{password}" th:value="${user.password}">
+
+                        <input type="submit" value="Change Profile">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <!-- //contact -->
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="copy-right">
+    <div class="container">
+        <p>&nbsp;&nbsp;&nbsp;Email: mumexpress@gmail.com &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Phone: 641 451 85 69</p>
+        <p>Copyright ©2019 MUM Express. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All rights reserved.</p>
+    </div>
+</div>
+<!-- FOOTER -->
+
+<!-- js-files -->
+<!-- jquery -->
+<script src="js/jquery-2.1.4.min.js"></script>
+<!-- //jquery -->
+
+<!-- popup modal (for signin & signup)-->
+<script src="js/jquery.magnific-popup.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+            fixedContentPos: false,
+            fixedBgPos: true,
+            overflowY: 'auto',
+            closeBtnInside: true,
+            preloader: false,
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+    });
+</script>
+<!-- Large modal -->
+<!-- <script>
+    $('#').modal('show');
+</script> -->
+<!-- //popup modal (for signin & signup)-->
+
+<!-- cart-js -->
+<script src="js/minicart.js"></script>
+<script>
+    paypalm.minicartk.render(); //use only unique class names other than paypal1.minicart1.Also Replace same class name in css and minicart.min.js
+
+    paypalm.minicartk.cart.on('checkout', function (evt) {
+        var items = this.items(),
+            len = items.length,
+            total = 0,
+            i;
+
+        // Count the number of each item in the cart
+        for (i = 0; i < len; i++) {
+            total += items[i].get('quantity');
+        }
+
+        if (total < 3) {
+            alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+            evt.preventDefault();
+        }
+    });
+</script>
+<!-- //cart-js -->
+
+<!-- password-script -->
+<script>
+    window.onload = function () {
+        document.getElementById("password1").onchange = validatePassword;
+        document.getElementById("password2").onchange = validatePassword;
+    }
+
+    function validatePassword() {
+        var pass2 = document.getElementById("password2").value;
+        var pass1 = document.getElementById("password1").value;
+        if (pass1 != pass2)
+            document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+        else
+            document.getElementById("password2").setCustomValidity('');
+        //empty string means no validation error
+    }
+</script>
+<!-- //password-script -->
+
+<!-- smoothscroll -->
+<script src="js/SmoothScroll.min.js"></script>
+<!-- //smoothscroll -->
+
+<!-- start-smooth-scrolling -->
+<script src="js/move-top.js"></script>
+<script src="js/easing.js"></script>
+<script>
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+
+            $('html,body').animate({
+                scrollTop: $(this.hash).offset().top
+            }, 1000);
+        });
+    });
+</script>
+<!-- //end-smooth-scrolling -->
+
+<!-- smooth-scrolling-of-move-up -->
+<script>
+    $(document).ready(function () {
+        /*
+        var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+        };
+        */
+        $().UItoTop({
+            easingType: 'easeOutQuart'
+        });
+
+    });
+</script>
+<!-- //smooth-scrolling-of-move-up -->
+
+<!-- for bootstrap working -->
+<script src="js/bootstrap.js"></script>
+<!-- //for bootstrap working -->
+<!-- //js-files -->
+
+</body>
+
+</html>

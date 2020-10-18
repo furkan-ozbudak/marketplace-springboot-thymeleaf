@@ -1,0 +1,431 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>MUM Express</title>
+    <!--/tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Grocery Shoppy Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!--//tags -->
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <!--pop-up-box-->
+    <link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
+    <!--//pop-up-box-->
+    <!-- price range -->
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui1.css">
+    <!-- fonts -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+</head>
+
+<body>
+<!-- HEADER STARTS-->
+
+<!-- MUM EXPRESS AND LOGO -->
+<div class="header-bot">
+    <div class="header-bot_inner_wthreeinfo_header_mid">
+        <!-- header-bot-->
+        <div class="col-md-4 logo_agile">
+            <h1>
+                <a th:href="@{/}">
+                    <span>M</span>UM
+                    <span>E</span>XPRESS
+                    <img th:src="@{/img/logo2.png}" alt=" ">
+                </a>
+            </h1>
+        </div>
+
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!-- MUM EXPRESS AND LOGO -->
+
+<!-- AUTHORIZATION AND NAV LINK -->
+<div class="ban-top">
+    <div class="container">
+        <div class="top_nav_left">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1"
+                                aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
+                        <ul sec:authorize="!(isAuthenticated())" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/login}"><span class="fa fa-unlock-alt"
+                                                                                   aria-hidden="true"></span> Login</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/register_input}"><span
+                                        class="fa fa-pencil-square-o" aria-hidden="true"></span> Sign up</a>
+                            </li>
+                        </ul>
+                        <ul sec:authorize="hasAuthority('SELLER')" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/products}"><i class="fa fa-cubes"></i> Products</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/seller/orders}"><i class="fa fa-file-text-o"></i>
+                                    Orders</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/users/followerList}"><i class="fa fa-users"></i>
+                                    Followers</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/profile/{id} (id = ${session.user.id})}"><i
+                                        class="fa fa-user-circle-o"></i> Profile</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        </ul>
+                        <ul sec:authorize="hasAuthority('BUYER')" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/buyer/cart}"><i class="fa fa-shopping-cart"
+                                                                                     aria-hidden="true"></i>
+                                    Cart</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/profile/{id} (id = ${session.user.id})}"><i
+                                        class="fa fa-user-circle-o"></i> Profile</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/buyer/orders}"><i class="fa fa-file-text-o"></i>
+                                    Orders</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        </ul>
+                        <ul sec:authorize="hasAuthority('ADMIN')" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/admin/users/SellerList}"><i
+                                        class="fa fa-user-circle-o"></i> Admin Page</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+<br/>
+<!-- AUTHORIZATION AND NAV LINK -->
+
+
+<!-- HEADER ENDS-->
+
+<div class="contact agileits">
+    <div class="contact-agileinfo">
+        <div class="contact-form wthree">
+            <form action="#" th:action="@{/register_save}" th:object="${user}" method="post">
+                <h2 style="text-align: center">User Registration</h2><br/>
+                <div class="">
+                    <label for="name">Full Name:</label><br/>
+                    <input type="text" id="name" th:field="*{name}" placeholder="name" class="form-control">
+                    <p th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}"
+                       th:errorclass="fieldError">Error</p>
+                </div>
+                <br/>
+                <div class="">
+                    <label>Email:</label><br/>
+                    <input type="text" id="email" th:field="*{email}" placeholder="email" class="form-control">
+                    <p th:if="${#fields.hasErrors('email')}" class="error" th:errors="*{email}"
+                       th:errorclass="fieldError">Error</p>
+                </div>
+                <br/>
+                <div class="">
+                    <label>Password:</label><br/>
+                    <input type="password" id="password" th:field="*{password}" placeholder="password" class="form-control">
+                    <p th:if="${#fields.hasErrors('password')}" class="error" th:errors="*{password}"
+                       th:errorclass="fieldError">Error</p>
+                </div>
+                <br/>
+                <div class="">
+                    <label>Account Type:</label><br/>
+                    <select id="type" th:field="*{type}" class="form-control">
+                        <!--<option th:value="'BUYER'">Buyer</option>-->
+                        <!--<option th:value="'SELLER'">Seller</option>-->
+                        <option th:each="type: ${types}" th:value="${type.id}" th:text="${type.name}">Role</option>
+                    </select>
+                </div>
+                <br/><br/>
+
+
+                <div class="">
+                    <label>Shipping State:</label><br/>
+                    <input type="text" id="shippingAddress_state" name="shippingAddress_state" class="form-control"
+                           placeholder="2 letter state abbreviation" th:field="*{shippingAddress.state}">
+                    <p th:if="${#fields.hasErrors('shippingAddress.state')}" class="error"
+                       th:errors="*{shippingAddress.state}" th:errorclass="fieldError">Error</p>
+                </div>
+                <br/>
+                <div class="">
+                    <label>Shipping ZIP code:</label><br/>
+                    <input type="text" id="shippingAddress_zipCode" th:field="*{shippingAddress.zipCode}"
+                           placeholder="Zip Code" class="form-control">
+                    <p th:if="${#fields.hasErrors('shippingAddress.zipCode')}" class="error"
+                       th:errors="*{shippingAddress.zipCode}" th:errorclass="fieldError">Error</p>
+                </div>
+                <br/>
+                <div class="">
+                    <label>Shipping City:</label><br/>
+                    <input type="text" id="shippingAddress_city" th:field="*{shippingAddress.city}" placeholder="city" class="form-control">
+                    <p th:if="${#fields.hasErrors('shippingAddress.city')}" class="error"
+                       th:errors="*{shippingAddress.city}" th:errorclass="fieldError">Error</p>
+                </div>
+                <br/>
+                <div class="">
+                    <label>Shipping Street:</label><br/>
+                    <input type="text" id="shippingAddress_street" th:field="*{shippingAddress.street}" class="form-control"
+                           placeholder="street">
+                    <p th:if="${#fields.hasErrors('shippingAddress.street')}" class="error"
+                       th:errors="*{shippingAddress.street}" th:errorclass="fieldError">Error</p>
+                </div>
+                <br/>
+
+
+                <div class="">
+                    <label>Billing State:</label>
+                    <input type="text" id="billingAddress_state" placeholder="2 letter state abbreviation" class="form-control"
+                           th:field="*{billingAddress.state}">
+                    <p th:if="${#fields.hasErrors('billingAddress.state')}" class="error"
+                       th:errors="*{billingAddress.state}" th:errorclass="fieldError">Error</p>
+                </div>
+                <br/>
+                <div class="">
+                    <label>Billing ZIP Code:</label><br/>
+                    <input type="text" id="billingAddress_zip" th:field="*{billingAddress.zipCode}" class="form-control"
+                           placeholder="Zip Code">
+                    <p th:if="${#fields.hasErrors('billingAddress.zipCode')}" class="error"
+                       th:errors="*{billingAddress.zipCode}" th:errorclass="fieldError">Error</p>
+                </div>
+                <br/>
+                <div class="">
+                    <label>Billing City:</label><br/>
+                    <input type="text" id="billingAddress_city" th:field="*{billingAddress.city}" placeholder="city"> class="form-control"
+                    <p th:if="${#fields.hasErrors('billingAddress.city')}" class="error"
+                       th:errors="*{billingAddress.city}" th:errorclass="fieldError">Error</p>
+                </div>
+                <br/>
+                <div class="">
+                    <label>Billing Street:</label><br/>
+                    <input type="text" id="billingAddress_street" th:field="*{billingAddress.street}" class="form-control"
+                           placeholder="street">
+                    <p th:if="${#fields.hasErrors('billingAddress.street')}" class="error"
+                       th:errors="*{billingAddress.street}" th:errorclass="fieldError">Error</p>
+                </div>
+                <br/>
+
+
+                <div class="">
+                    <label>Name on Card:</label><br/>
+                    <input type="text" id="card_name" th:field="*{creditCard.name}" placeholder="name" class="form-control">
+                    <p th:if="${#fields.hasErrors('creditCard.name')}" class="error" th:errors="*{creditCard.name}"
+                       th:errorclass="fieldError">Error</p>
+                </div>
+                <br/>
+                <div class="">
+                    <label>Card Expiration Date:</label><br/>
+                    <input type="text" id="card_expiration_date" th:field="*{creditCard.validDate}"
+                           placeholder="Format: MM/YY           Example: 05/20" class="form-control">
+                    <p th:if="${#fields.hasErrors('creditCard.validDate')}" class="error"
+                       th:errors="*{creditCard.validDate}" th:errorclass="fieldError">Error</p>
+                </div>
+                <br/>
+                <div class="">
+                    <label>Card Number:</label><br/>
+                    <input type="text" id="card_number" th:field="*{creditCard.number}" placeholder="number" class="form-control">
+                    <p th:if="${#fields.hasErrors('creditCard.number')}" class="error" th:errors="*{creditCard.number}"
+                       th:errorclass="fieldError">Error</p>
+                </div>
+                <br/>
+                <input type="submit" value="Submit User">
+            </form>
+        </div>
+
+    </div>
+</div>
+<!-- //contact -->
+<br/><br/><br/><br/>
+
+<!-- FOOTER -->
+<div class="copy-right">
+    <div class="container">
+        <p>&nbsp;&nbsp;&nbsp;Email: buysell@gmail.com &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Phone: 641 451 85 69</p>
+        <p>Copyright ©2019 MUM Express. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All rights reserved.</p>
+    </div>
+</div>
+<!-- FOOTER -->
+
+<!-- js-files -->
+<!-- jquery -->
+<script src="js/jquery-2.1.4.min.js"></script>
+<!-- //jquery -->
+
+<!-- popup modal (for signin & signup)-->
+<script src="js/jquery.magnific-popup.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+            fixedContentPos: false,
+            fixedBgPos: true,
+            overflowY: 'auto',
+            closeBtnInside: true,
+            preloader: false,
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+    });
+</script>
+<!-- Large modal -->
+<!-- <script>
+    $('#').modal('show');
+</script> -->
+<!-- //popup modal (for signin & signup)-->
+
+<!-- cart-js -->
+<script src="js/minicart.js"></script>
+<script>
+    paypalm.minicartk.render(); //use only unique class names other than paypal1.minicart1.Also Replace same class name in css and minicart.min.js
+
+    paypalm.minicartk.cart.on('checkout', function (evt) {
+        var items = this.items(),
+            len = items.length,
+            total = 0,
+            i;
+
+        // Count the number of each item in the cart
+        for (i = 0; i < len; i++) {
+            total += items[i].get('quantity');
+        }
+
+        if (total < 3) {
+            alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+            evt.preventDefault();
+        }
+    });
+</script>
+<!-- //cart-js -->
+
+<!-- password-script -->
+<script>
+    window.onload = function () {
+        document.getElementById("password1").onchange = validatePassword;
+        document.getElementById("password2").onchange = validatePassword;
+    }
+
+    function validatePassword() {
+        var pass2 = document.getElementById("password2").value;
+        var pass1 = document.getElementById("password1").value;
+        if (pass1 != pass2)
+            document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+        else
+            document.getElementById("password2").setCustomValidity('');
+        //empty string means no validation error
+    }
+</script>
+<!-- //password-script -->
+
+<!-- smoothscroll -->
+<script src="js/SmoothScroll.min.js"></script>
+<!-- //smoothscroll -->
+
+<!-- start-smooth-scrolling -->
+<script src="js/move-top.js"></script>
+<script src="js/easing.js"></script>
+<script>
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+
+            $('html,body').animate({
+                scrollTop: $(this.hash).offset().top
+            }, 1000);
+        });
+    });
+</script>
+<!-- //end-smooth-scrolling -->
+
+<!-- smooth-scrolling-of-move-up -->
+<script>
+    $(document).ready(function () {
+        /*
+        var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+        };
+        */
+        $().UItoTop({
+            easingType: 'easeOutQuart'
+        });
+
+    });
+</script>
+<!-- //smooth-scrolling-of-move-up -->
+
+<!-- for bootstrap working -->
+<script src="js/bootstrap.js"></script>
+<!-- //for bootstrap working -->
+<!-- //js-files -->
+
+</body>
+
+</html>

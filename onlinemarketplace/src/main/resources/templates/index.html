@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <title>Mum Express</title>
+    <!--/tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!--//tags -->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet">
+    <!--pop-up-box-->
+    <link th:href="@{/css/popuo-box.css}" rel="stylesheet" type="text/css" media="all"/>
+    <!--//pop-up-box-->
+    <!-- price range -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui1.css}">
+    <!-- fonts -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800}" rel="stylesheet">
+    <link href="@{/fonts/FontAwesome.otf}">
+</head>
+
+<body>
+
+<!-- //top-header -->
+<!-- header-bot-->
+<div class="header-bot">
+    <div class="header-bot_inner_wthreeinfo_header_mid">
+        <!-- header-bot-->
+        <div class="col-md-4 logo_agile">
+            <h1>
+                <a th:href="@{/}">
+                    <span>M</span>UM
+                    <span>E</span>XPRESS
+                    <img th:src="@{/img/logo2.png}" alt=" ">
+                </a>
+            </h1>
+        </div>
+        <!-- header-bot -->
+        <div class="col-md-8 header">
+            <!-- search -->
+            <div class="agileits_search">
+                <form th:action="@{/search/products}" th:object="${search}" method="get">
+                    <input name="search" type="search" placeholder="How can we help you today?" required="">
+                    <button type="submit" class="btn btn-default" aria-label="Left Align">
+                        <span class="fa fa-search" aria-hidden="true"> </span>
+                    </button>
+                </form>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!-- AUTHORIZATION AND NAV LINK -->
+<div class="ban-top">
+    <div class="container">
+        <div class="top_nav_left">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1"
+                                aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
+                        <ul sec:authorize="!(isAuthenticated())" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/login}"><span class="fa fa-unlock-alt"
+                                                                                   aria-hidden="true"></span> Login</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/register_input}"><span
+                                        class="fa fa-pencil-square-o" aria-hidden="true"></span> Sign up</a>
+                            </li>
+                        </ul>
+                        <ul sec:authorize="hasAuthority('SELLER')" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/products}"><i class="fa fa-cubes"></i> Products</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/seller/orders}"><i class="fa fa-file-text-o"></i>
+                                    Orders</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/users/followerList}"><i class="fa fa-users"></i>
+                                    Followers</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/profile/{id} (id = ${session.user.id})}"><i
+                                        class="fa fa-user-circle-o"></i> Profile</a>
+                            </li>
+                            <li class="">
+                                <form action="#" th:action="@{/logout}" method="post">
+                                    <input type="submit" class="btn btn-danger btn-logoff" value="Logout" />
+                                </form>
+                            </li>
+                        </ul>
+                        <ul sec:authorize="hasAuthority('BUYER')" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/buyer/cart}"><i class="fa fa-shopping-cart"
+                                                                                     aria-hidden="true"></i>
+                                    Cart</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/profile/{id} (id = ${session.user.id})}"><i
+                                        class="fa fa-user-circle-o"></i> Profile</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/buyer/orders}"><i class="fa fa-file-text-o"></i>
+                                    Orders</a>
+                            </li>
+                            <li class="">
+                                <form action="#" th:action="@{/logout}" method="post">
+                                    <input type="submit" class="btn btn-danger btn-logoff" value="Logout" />
+                                </form>
+                            </li>
+                        </ul>
+                        <ul sec:authorize="hasAuthority('ADMIN')" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/admin/users/SellerList}"><i
+                                        class="fa fa-user-circle-o"></i> Admin Page</a>
+                            </li>
+                            <li class="">
+                                <form action="#" th:action="@{/logout}" method="post">
+                                    <input type="submit" class="btn btn-danger btn-logoff" value="Logout" />
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- AUTHORIZATION AND NAV LINK -->
+<!-- //navigation -->
+<!-- banner -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators-->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="3" class=""></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h3>Big
+                        <span>Save</span>
+                    </h3>
+                    <p>Get flat
+                        <span>10%</span> Cashback</p>
+                    <a class="button2" href="#">Shop Now </a>
+                </div>
+            </div>
+        </div>
+        <div class="item item2">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h3>Healthy
+                        <span>Saving</span>
+                    </h3>
+                    <p>Get Upto
+                        <span>30%</span> Off</p>
+                    <a class="button2" href="#">Shop Now </a>
+                </div>
+            </div>
+        </div>
+        <div class="item item3">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h3>Big
+                        <span>Deal</span>
+                    </h3>
+                    <p>Get Best Offer Upto
+                        <span>20%</span>
+                    </p>
+                    <a class="button2" href="#">Shop Now </a>
+                </div>
+            </div>
+        </div>
+        <div class="item item4">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h3>Today
+                        <span>Discount</span>
+                    </h3>
+                    <p>Get Now
+                        <span>40%</span> Discount</p>
+                    <a class="button2" href="#">Shop Now </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<!-- //banner -->
+
+<!-- top Products -->
+<div class="ads-grid">
+    <div class="container">
+        <!-- tittle heading -->
+        <h3 class="tittle-w3l">Our Top Products
+            <span class="heading-style">
+					<i></i>
+					<i></i>
+					<i></i>
+				</span>
+        </h3>
+
+        <!-- product right -->
+        <div class="agileinfo-ads-display col-md-12">
+            <div class="wrapper">
+                <!-- first section (nuts) -->
+                <div class="product-sec1">
+                    <h3 class="heading-tittle">Top Products</h3>
+                    <div th:each="p: ${allProducts}" class="col-md-4 product-men">
+                        <div class="men-pro-item simpleCart_shelfItem">
+                            <div class="men-thumb-item">
+                                <img th:src="@{${'/img/'+ p.productImage}}">
+
+                                <div class="men-cart-pro">
+                                    <div class="inner-men-cart-pro">
+                                        <a th:href="@{/product/{pid}(pid=${p.id})}" class="link-product-add-cart">Quick
+                                            View</a>
+                                    </div>
+                                </div>
+                                <span class="product-new-top">New</span>
+                            </div>
+                            <div class="item-info-product">
+                                <h4>
+                                    <a th:href="@{/product/{pid}(pid=${p.getId()})}">
+                                        <span class="truncate-text" th:text="${p.getName()}"></span>
+                                    </a>
+                                </h4>
+                                <div class="info-product-price">
+                                    <span class="item_price" th:text="'$' + ${p.price}">$149.00</span>
+                                    <del th:text="${p.price}"></del>
+                                </div>
+                                <div sec:authorize="hasAuthority('BUYER')"
+                                     class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                    <form th:action="@{/product/{pid}/addToCart (pid = ${p.id})}" method="post">
+                                        <fieldset>
+                                            <input type="submit" name="submit" value="Add to cart" class="button"/>
+                                        </fieldset>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="clearfix"></div>
+                </div>
+
+                <!-- //fourth section (noodles) -->
+            </div>
+        </div>
+        <!-- //product right -->
+    </div>
+</div>
+<!-- //top products -->
+<!-- special offers -->
+<div th:if="${adsProducts}" class="featured-section" id="projects">
+    <div class="container">
+        <!-- tittle heading -->
+        <h3 class="tittle-w3l">Special Offers
+            <span class="heading-style">
+					<i></i>
+					<i></i>
+					<i></i>
+				</span>
+        </h3>
+        <!-- //tittle heading -->
+        <div class="content-bottom-in">
+            <ul id="flexiselDemo1">
+
+
+                <li th:each="prod : ${adsProducts}">
+                    <div class="w3l-specilamk">
+                        <div class="speioffer-agile">
+                            <a th:href="@{/product/{pid}(pid=${prod.id})}">
+                                <img th:src="@{${'/img/'+ prod.productImage}}" alt="" th:title="${prod.name}">
+                            </a>
+                        </div>
+                        <div class="product-name-w3l">
+                            <h4>
+                                <a th:href="@{/product/{pid}(pid=${prod.id})}" th:text="${prod.name}">Aashirvaad, 5g</a>
+                            </h4>
+                            <div class="w3l-pricehkj">
+                                <span class="item_price" th:text="'$' + ${prod.price}">$149.00</span>
+                                <del th:text="${prod.price}"></del>
+                            </div>
+                            <div sec:authorize="hasAuthority('BUYER')"
+                                 class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                <form th:action="@{/product/{pid}/addToCart (pid = ${prod.id})}" method="post">
+                                    <fieldset>
+                                        <input type="submit" name="submit" value="Add to cart" class="button"/>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<!-- FOOTER -->
+<div class="copy-right">
+    <div class="container">
+        <p>&nbsp;&nbsp;&nbsp;Email: mumexpress@gmail.com &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Phone: 641 451
+            85 69</p>
+        <p>Copyright ©2019 MUM Express. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All rights reserved.</p>
+    </div>
+</div>
+<!-- FOOTER -->
+
+<!-- js-files -->
+<!-- jquery -->
+<script th:src="@{js/jquery-2.1.4.min.js}"></script>
+<!-- //jquery -->
+
+<!-- popup modal (for signin & signup)-->
+<script th:src="@{js/jquery.magnific-popup.js}"></script>
+<script>
+    $(document).ready(function () {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+            fixedContentPos: false,
+            fixedBgPos: true,
+            overflowY: 'auto',
+            closeBtnInside: true,
+            preloader: false,
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+    });
+</script>
+<!-- Large modal -->
+<!-- <script>
+    $('#').modal('show');
+</script> -->
+<!-- //popup modal (for signin & signup)-->
+
+
+<!-- price range (top products) -->
+<script th:src="@{js/jquery-ui.js}"></script>
+<script>
+    //<![CDATA[
+    $(window).load(function () {
+        $("#slider-range").slider({
+            range: true,
+            min: 0,
+            max: 9000,
+            values: [50, 6000],
+            slide: function (event, ui) {
+                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+            }
+        });
+        $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+
+    }); //]]>
+</script>
+<!-- //price range (top products) -->
+
+<!-- flexisel (for special offers) -->
+<script th:src="@{js/jquery.flexisel.js}"></script>
+<script>
+    $(window).load(function () {
+        $("#flexiselDemo1").flexisel({
+            visibleItems: 3,
+            animationSpeed: 1000,
+            autoPlay: true,
+            autoPlaySpeed: 3000,
+            pauseOnHover: true,
+            enableResponsiveBreakpoints: true,
+            responsiveBreakpoints: {
+                portrait: {
+                    changePoint: 480,
+                    visibleItems: 1
+                },
+                landscape: {
+                    changePoint: 640,
+                    visibleItems: 2
+                },
+                tablet: {
+                    changePoint: 768,
+                    visibleItems: 2
+                }
+            }
+        });
+
+    });
+</script>
+<!-- //flexisel (for special offers) -->
+
+
+<!-- smoothscroll -->
+<script th:src="@{js/SmoothScroll.min.js}"></script>
+<!-- //smoothscroll -->
+
+<!-- start-smooth-scrolling -->
+<script th:src="@{js/move-top.js}"></script>
+<script th:src="@{js/easing.js}"></script>
+<script>
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+
+            $('html,body').animate({
+                scrollTop: $(this.hash).offset().top
+            }, 1000);
+        });
+    });
+</script>
+<!-- //end-smooth-scrolling -->
+
+
+<!-- for bootstrap working -->
+<script th:src="@{js/bootstrap.js}"></script>
+<!-- //for bootstrap working -->
+<!-- //js-files -->
+
+
+</body>
+
+</html>

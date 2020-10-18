@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:src="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>Mum Express</title>
+	<!--/tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="" />
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<!--//tags -->
+	<link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
+	<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />
+	<link th:href="@{/css/font-awesome.css}" rel="stylesheet">
+	<!--pop-up-box-->
+	<link th:href="@{/css/popuo-box.css}" rel="stylesheet" type="text/css" media="all" />
+	<!--//pop-up-box-->
+	<!-- price range -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui1.css}">
+	<!-- fonts -->
+	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800}" rel="stylesheet">
+	<link href="@{/fonts/FontAwesome.otf}">
+</head>
+<body>
+
+
+	<!-- //top-header -->
+	<!-- header-bot-->
+	<div class="header-bot">
+		<div class="header-bot_inner_wthreeinfo_header_mid">
+			<!-- header-bot-->
+			<div class="col-md-4 logo_agile">
+				<h1>
+					<a th:href="@{/}">
+						<span>M</span>UM
+						<span>E</span>XPRESS
+						<img th:src="@{/img/logo2.png}" alt=" ">
+					</a>
+				</h1>
+			</div>
+			<!-- header-bot -->
+			<div class="col-md-8 header">
+				<!-- header lists -->
+				<ul>
+
+
+					<li>
+						<span class="fa fa-phone" aria-hidden="true"></span> 001 234 5678
+					</li>
+					<li>
+						<a href="#" data-toggle="modal" data-target="#myModal1">
+							<span class="fa fa-unlock-alt" aria-hidden="true"></span> Sign In </a>
+					</li>
+					<li>
+						<a href="#" data-toggle="modal" data-target="#myModal2">
+							<span class="fa fa-pencil-square-o" aria-hidden="true"></span> Sign Up </a>
+					</li>
+				</ul>
+				<!-- //header lists -->
+				<!-- search -->
+				<!-- //search -->
+				<!-- cart details -->
+				<div class="top_nav_right">
+					<div class="wthreecartaits wthreecartaits2 cart cart box_1">
+						<form action="#" method="post" class="last">
+							<input type="hidden" name="cmd" value="_cart">
+							<input type="hidden" name="display" value="1">
+							<button class="w3view-cart" type="submit" name="submit" value="">
+								<i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+							</button>
+						</form>
+					</div>
+				</div>
+				<!-- //cart details -->
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<!-- shop locator (popup) -->
+	<!-- Button trigger modal(shop-locator) -->
+
+	<!-- //shop locator (popup) -->
+
+	<!-- //Modal1 -->
+	<!-- //signin Model -->
+
+	<!-- //header-bot -->
+	<!-- navigation -->
+	<div class="ban-top">
+		<div class="container">
+
+			<div class="top_nav_left">
+				<nav class="navbar navbar-default">
+					<div class="container-fluid">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+							    aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
+
+                            <!- //////--------------------------------------------/////////////////////-->
+                            <!--<ul th:if="${user.type} == 'SELLER'" class="nav navbar-nav menu__list">-->
+<!--								<li class="active">-->
+<!--									<a class="nav-stylehead" th:href="@{/}">Home-->
+<!--										<span class="sr-only">(current)</span>-->
+<!--									</a>-->
+<!--								</li>-->
+<!--								<li class="">-->
+<!--									<a class="nav-stylehead" th:href="@{/products}">Products</a>-->
+<!--								</li>-->
+<!--								<li class="">-->
+<!--									<a class="nav-stylehead" th:href="@{/seller/orders}">Orders</a>-->
+<!--								</li>-->
+<!--								<li class="">-->
+<!--									<a class="nav-stylehead" th:href="@{/users/followerList}">Followers</a>-->
+<!--								</li>-->
+<!--								<li class="">-->
+<!--									<a class="nav-stylehead" th:href="@{/profile/{id} (id = ${user.id})}">Profile</a>-->
+<!--								</li>-->
+<!--								<li class="">-->
+<!--									<a class="nav-stylehead" th:href="@{/}">Logout</a>-->
+<!--								</li>-->
+
+<!--							</ul>-->
+
+
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+	<!-- //navigation -->
+
+
+    <div class="container">
+            <div class="grid_3 grid_5 w3ls">
+                        <h3>Notifications</h3>
+						<div th:each="u: ${userLists}">
+
+							<div th:if="${u.getId()==1}" class="alert alert-success" role="alert">
+								<strong th:text="${newProduct} +'Uploaded !!!'"></strong> <a th:href="@{/}"> Click Here </a> to check surprise Deals.
+							</div>
+
+						</div>
+
+            </div>
+    </div>
+
+<!-- copyright -->
+	<div class="copy-right" style="margin-top:20px;">
+		<div class="container">
+			<p>© 2019 MUM Express. All rights reserved
+			</p>
+		</div>
+	</div>
+	<!-- //copyright -->
+
+</body>

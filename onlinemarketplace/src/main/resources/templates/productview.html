@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Product</title>
+</head>
+<body>
+<div id="product">
+    <p>Product Name: <span th:text="${product.name}"></span></p>
+    <p>Product Price: <span th:text="${product.price}"></span></p>
+    <p>Description: <span th:text="${product.description}"></span></p>
+    <p>Created Date: <span th:text="${product.createDate}"></span></p>
+</div>
+<hr/>
+<div>
+    <p th:text="${product.seller.name}"></p>
+    <p th:text="${product.seller.email}"></p>
+    <p th:text="${product.seller.id}"></p>
+    <form th:if="${follow}==1" th:action="@{/users/follow/{uid}(uid=${product.seller.id})}" method="post">
+        <input type="submit" value="Follow"/>
+    </form>
+
+    <form th:if="${follow}==0" th:action="@{/users/unfollow/{uid}(uid=${product.seller.id})}" method="post">
+        <input type="submit" value="Unfollow"/>
+    </form>
+</div>
+
+
+<div id="review">
+
+    <h3>Reviews</h3>
+
+    <div th:each="r: ${reviews}">
+        <img src="">
+        <p>User Name: <span th:text="${r.user.name}"></span></p>
+        <p>Description: <span th:text="${r.description}"></span></p>
+
+        </hr>
+
+    </div>
+
+    <hr/>
+    <div id="postReview">
+
+        <!--        Session USer-->
+        <p>User Name: <span></span></p>
+        <form th:action="@{/product/{pid}/newReview(pid=${product.id})}" th:object="${newReview}" method="post">
+
+
+            <textarea th:field="*{description}"></textarea>
+
+            <input type="hidden" value="${product.id}">
+
+            <input type="submit" value="Post Review">
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+</body>
+</html>

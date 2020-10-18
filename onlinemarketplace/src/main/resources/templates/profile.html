@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:src="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <title>Mum Express</title>
+    <!--/tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!--//tags -->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet">
+    <!--pop-up-box-->
+    <link th:href="@{/css/popuo-box.css}" rel="stylesheet" type="text/css" media="all"/>
+    <!--//pop-up-box-->
+    <!-- price range -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui1.css}">
+    <!-- fonts -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800}" rel="stylesheet">
+    <link href="@{/fonts/FontAwesome.otf}">
+</head>
+<body>
+
+
+<!-- HEADER STARTS-->
+
+<!-- MUM EXPRESS AND LOGO -->
+<div class="header-bot">
+    <div class="header-bot_inner_wthreeinfo_header_mid">
+        <!-- header-bot-->
+        <div class="col-md-4 logo_agile">
+            <h1>
+                <a th:href="@{/}">
+                    <span>M</span>UM
+                    <span>E</span>XPRESS
+                    <img th:src="@{/img/logo2.png}" alt=" ">
+                </a>
+            </h1>
+        </div>
+
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!-- MUM EXPRESS AND LOGO -->
+
+<!-- AUTHORIZATION AND NAV LINK -->
+<div class="ban-top">
+    <div class="container">
+        <div class="top_nav_left">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1"
+                                aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
+                        <ul sec:authorize="!(isAuthenticated())" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/login}"><span class="fa fa-unlock-alt"
+                                                                                   aria-hidden="true"></span> Login</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/register_input}"><span
+                                        class="fa fa-pencil-square-o" aria-hidden="true"></span> Sign up</a>
+                            </li>
+                        </ul>
+                        <ul sec:authorize="hasAuthority('SELLER')" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/products}"><i class="fa fa-cubes"></i> Products</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/seller/orders}"><i class="fa fa-file-text-o"></i>
+                                    Orders</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/users/followerList}"><i class="fa fa-users"></i>
+                                    Followers</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/profile/{id} (id = ${session.user.id})}"><i
+                                        class="fa fa-user-circle-o"></i> Profile</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        </ul>
+                        <ul sec:authorize="hasAuthority('BUYER')" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/buyer/cart}"><i class="fa fa-shopping-cart"
+                                                                                     aria-hidden="true"></i>
+                                    Cart</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/profile/{id} (id = ${session.user.id})}"><i
+                                        class="fa fa-user-circle-o"></i> Profile</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/buyer/orders}"><i class="fa fa-file-text-o"></i>
+                                    Orders</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        </ul>
+                        <ul sec:authorize="hasAuthority('ADMIN')" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/admin/users/SellerList}"><i
+                                        class="fa fa-user-circle-o"></i> Admin Page</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- AUTHORIZATION AND NAV LINK -->
+
+
+<!-- HEADER ENDS-->
+
+
+<div class="container" style="margin-top:50px;">
+
+
+    <div class="row">
+
+        <h3 class="text-info" th:text="${user.getName()}+'\'s Profile'"><span></span></h3><br/>
+
+        <div class="col-12">
+
+
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="card-title mb-4">
+                        <div class="d-flex justify-content-start">
+                            <div class="image-container">
+                                <img th:src="@{/img/user.png}" style="width: 150px; height: 150px"
+                                     class="img-thumbnail"/>
+
+                            </div>
+                            <br/>
+
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+
+                            <div class="tab-content ml-1" id="">
+                                <div class="" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
+
+
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Full Name</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            <span th:text="${user.name}"></span>
+                                        </div>
+                                    </div>
+                                    <hr/>
+
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Email</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            <span th:text="${user.email}"></span>
+                                        </div>
+                                    </div>
+                                    <hr/>
+
+
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Shipping Address</label>
+                                        </div>
+                                        <div class="col-md-8 col-6" th:each="a:${shippingAddress}">
+                                            <span th:text="${a.city}"></span>
+                                            <span th:text="${a.street}"></span>
+                                            <span th:text="${a.state}"></span>
+                                            <span th:text="${a.zipCode}"></span>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Billing Address</label>
+                                        </div>
+                                        <div class="col-md-8 col-6" th:each="a:${billingAddress}">
+                                            <span th:text="${a.city}"></span>
+                                            <span th:text="${a.street}"></span>
+                                            <span th:text="${a.state}"></span>
+                                            <span th:text="${a.zipCode}"></span>
+                                        </div>
+                                    </div>
+                                    <hr/>
+
+
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Earning Points</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            <span class="text-warning" th:text="${user.points}"></span>
+                                        </div>
+                                    </div>
+                                    <hr/>
+<!--                                    <h5>Payment Details</h5>-->
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Credit Card Number:</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            <span class="text-warning" th:text="${user.getCreditCard().number}"></span>
+                                        </div>
+                                    </div>
+                                    <hr/>
+
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Credit Card Name:</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            <span class="text-warning" th:text="${user.getCreditCard().name}"></span>
+                                        </div>
+                                    </div>
+                                    <hr/>
+
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Card Validity:</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            <span class="text-warning" th:text="${user.getCreditCard().validDate}"></span>
+                                        </div>
+                                    </div>
+
+                                    <form th:if="${user.id}==${sessionUser.id}" th:action="@{/profile/{uid}/edit(uid=${user.id})}" method="get">
+                                        <div style="margin-top:5px;">
+
+                                            <div class="col-md-8 col-6">
+
+                                                <input type="submit" value="Edit Profile" class="btn btn-info">
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <br/><br/><br/><br/>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+<!-- FOOTER -->
+<div class="copy-right">
+    <div class="container">
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email: mumexpress@gmail.com &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Phone: 641 451 85 69</p>
+        <p>Copyright ©2019 MUM Express. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All rights reserved.</p>
+    </div>
+</div>
+<!-- FOOTER -->
+
+<!-- js-files -->
+<!-- jquery -->
+<script th:src="@{js/jquery-2.1.4.min.js}"></script>
+<!-- //jquery -->
+
+<!-- popup modal (for signin & signup)-->
+<script th:src="@{js/jquery.magnific-popup.js}"></script>
+<script>
+    $(document).ready(function () {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+            fixedContentPos: false,
+            fixedBgPos: true,
+            overflowY: 'auto',
+            closeBtnInside: true,
+            preloader: false,
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+    });
+</script>
+<!-- Large modal -->
+<!-- <script>
+    $('#').modal('show');
+</script> -->
+<!-- //popup modal (for signin & signup)-->
+
+
+<!-- price range (top products) -->
+<script th:src="@{js/jquery-ui.js}"></script>
+<script>
+    //<![CDATA[
+    $(window).load(function () {
+        $("#slider-range").slider({
+            range: true,
+            min: 0,
+            max: 9000,
+            values: [50, 6000],
+            slide: function (event, ui) {
+                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+            }
+        });
+        $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+
+    }); //]]>
+</script>
+<!-- //price range (top products) -->
+
+<script th:src="@{/js/profile.js}"></script>
+
+<!-- flexisel (for special offers) -->
+<script th:src="@{/js/jquery.flexisel.js}"></script>
+<script>
+    $(window).load(function () {
+        $("#flexiselDemo1").flexisel({
+            visibleItems: 3,
+            animationSpeed: 1000,
+            autoPlay: true,
+            autoPlaySpeed: 3000,
+            pauseOnHover: true,
+            enableResponsiveBreakpoints: true,
+            responsiveBreakpoints: {
+                portrait: {
+                    changePoint: 480,
+                    visibleItems: 1
+                },
+                landscape: {
+                    changePoint: 640,
+                    visibleItems: 2
+                },
+                tablet: {
+                    changePoint: 768,
+                    visibleItems: 2
+                }
+            }
+        });
+
+    });
+</script>
+<!-- //flexisel (for special offers) -->
+
+
+<!-- smoothscroll -->
+<script th:src="@{/js/SmoothScroll.min.js}"></script>
+<!-- //smoothscroll -->
+
+<!-- start-smooth-scrolling -->
+<script th:src="@{/js/move-top.js}"></script>
+<script th:src="@{/js/easing.js}"></script>
+<script>
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+
+            $('html,body').animate({
+                scrollTop: $(this.hash).offset().top
+            }, 1000);
+        });
+    });
+</script>
+<!-- //end-smooth-scrolling -->
+
+
+<!-- for bootstrap working -->
+<script th:src="@{/js/bootstrap.js}"></script>
+<!-- //for bootstrap working -->
+<!-- //js-files -->
+
+
+
+
+</html>
+
+
+

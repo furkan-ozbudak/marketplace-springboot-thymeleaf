@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <title>Mum Express</title>
+    <!--/tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!--//tags -->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet">
+    <!--pop-up-box-->
+    <link th:href="@{/css/popuo-box.css}" rel="stylesheet" type="text/css" media="all"/>
+    <!--//pop-up-box-->
+    <!-- price range -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui1.css}">
+    <!-- fonts -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800}" rel="stylesheet">
+    <link href="@{/fonts/FontAwesome.otf}">
+</head>
+
+<body>
+
+<!-- //top-header -->
+<!-- header-bot-->
+<div class="header-bot">
+    <div class="header-bot_inner_wthreeinfo_header_mid">
+        <!-- header-bot-->
+        <div class="col-md-4 logo_agile">
+            <h1>
+                <a th:href="@{/}">
+                    <span>M</span>UM
+                    <span>E</span>XPRESS
+                    <img th:src="@{/img/logo2.png}" alt=" ">
+                </a>
+            </h1>
+        </div>
+
+    </div>
+</div>
+<!-- shop locator (popup) -->
+<!-- Button trigger modal(shop-locator) -->
+
+<!-- //shop locator (popup) -->
+<!-- signin Model -->
+<!-- Modal1 -->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body modal-body-sub_agile">
+                <div class="main-mailposi">
+                    <span class="fa fa-envelope-o" aria-hidden="true"></span>
+                </div>
+                <div class="modal_body_left modal_body_left1">
+                    <h3 class="agileinfo_sign">Sign In </h3>
+                    <p>
+                        Sign In now, Let's start your Grocery Shopping. Don't have an account?
+                        <a href="#" data-toggle="modal" data-target="#myModal2">
+                            Sign Up Now</a>
+                    </p>
+                    <form action="#" method="post">
+                        <div class="styled-input agile-styled-input-top">
+                            <input type="text" placeholder="User Name" name="Name" required="">
+                        </div>
+                        <div class="styled-input">
+                            <input type="password" placeholder="Password" name="password" required="">
+                        </div>
+                        <input type="submit" value="Sign In">
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- //Modal content-->
+    </div>
+</div>
+
+    </div>
+</div>
+
+<div class="ban-top">
+    <div class="container">
+
+        <div class="top_nav_left">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1"
+                                aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
+
+                        <ul sec:authorize="!(isAuthenticated())" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/login}"><span class="fa fa-unlock-alt"
+                                                                                   aria-hidden="true"></span> Login</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/register_input}"><span
+                                        class="fa fa-pencil-square-o" aria-hidden="true"></span> Sign up</a>
+                            </li>
+
+                        </ul>
+
+                        <ul sec:authorize="hasAuthority('SELLER')" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/products}"><i class="fa fa-cubes"></i> Products</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/seller/orders}"><i class="fa fa-file-text-o"></i>
+                                    Orders</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/users/followerList}"><i class="fa fa-users"></i>
+                                    Followers</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/profile/{id} (id = ${session.user.id})}"><i
+                                        class="fa fa-user-circle-o"></i> Profile</a>
+                            </li>
+                            <li class="">
+                                <form action="#" th:action="@{/logout}" method="post">
+                                    <input type="submit" class="btn btn-danger btn-logoff" value="Logout" />
+                                </form>
+                            </li>
+
+                        </ul>
+
+                        <ul sec:authorize="hasAuthority('BUYER')" class="nav navbar-nav menu__list">
+                            <li class="active">
+                                <a class="nav-stylehead" th:href="@{/}"><i class="fa fa-home"></i> Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/buyer/cart}"><i class="fa fa-shopping-cart"
+                                                                                     aria-hidden="true"></i>
+                                    Cart</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/profile/{id} (id = ${session.user.id})}"><i
+                                        class="fa fa-user-circle-o"></i> Profile</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" th:href="@{/buyer/orders}"><i class="fa fa-file-text-o"></i>
+                                    Orders</a>
+                            </li>
+                            <li class="">
+                                <form action="#" th:action="@{/logout}" method="post">
+                                    <input type="submit" class="btn btn-danger btn-logoff" value="Logout" />
+                                </form>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- //navigation -->
+
+<div class="container" style="width: 1000px; margin:0 auto; min-height: 700px;">
+    <div class="row">
+        <br>
+        <div class="col-md-12">
+            <h4 class="result text-info text-left" th:if="${added}">Product added successfuly!</h4>
+
+            <h4 class="result text-info text-left" th:if="${result}">Thanks for buying!</h4>
+            <h4 class="result text-info text-left" th:if="${resultRemove}">Product removed!</h4>
+            <div class="col-md-4 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
+
+                <!--REVIEW ORDER-->
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h4>Review Order</h4>
+                    </div>
+                    <div class="panel-body" th:if="${cart.productList.size()} > 0">
+                        <div class="col-md-12" th:each="product : ${cart.productList}">
+                            <strong th:text="${product.name}"></strong>
+                            <div class="pull-right"><span>$</span><span th:text="${product.price}">200.00</span></div>
+
+                        </div>
+
+
+                        <div class="col-md-12">
+                            <hr>
+                            <strong>Order Total</strong>
+                            <div class="pull-right"><span>$</span><span th:text="${cart.totalPrice}">150.00</span></div>
+                            <hr>
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Credit Card Number:</strong>
+                            <div class="pull-right"><span></span><span th:text="${creditCard.number}">150.00</span>
+                            </div>
+                            <hr>
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Credit Card Name:</strong>
+                            <div class="pull-right"><span></span><span th:text="${creditCard.name}">150.00</span></div>
+                            <hr>
+                        </div>
+
+                        <div class="col-md-12">
+                            <strong>Card Expiry</strong>
+                            <div class="pull-right"><span></span><span th:text="${creditCard.validDate}"></span></div>
+                            <hr>
+                        </div>
+
+                        <form th:action="@{/buyer/cart/setorder/1}" method="post">
+                            <button type="submit" class="btn btn-info btn-lg btn-block">Checkout</button>
+                        </form>
+
+                    </div>
+
+                </div>
+                <!--REVIEW ORDER END-->
+            </div>
+            <div class="col-md-8 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
+                <!--SHIPPING METHOD-->
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><h4>Current Cart</h4></div>
+                    <div class="panel-body">
+                        <table class="table borderless">
+                            <thead>
+                            <tr>
+                                <td><strong>Your Cart: # item</strong></td>
+                                <td>Price</td>
+                                <td>Seller Name:</td>
+                                <td></td>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                            <tr th:each="product : ${cart.productList}">
+                                <td class="col-md-4">
+                                    <div class="media">
+                                        <a class="thumbnail pull-left" href="#"> <img class="media-object"
+                                                                                      th:src="@{${'/img/'+product.productImage}}"
+                                                                                      style="width: 72px; height: 72px;">
+                                        </a>
+                                        <div class="media-body">
+                                            <h5 class="media-heading" th:text="${product.name}"> Product Name</h5>
+                                            <h5 class="media-heading" th:text="'PR'+${product.id}"> Product Code</h5>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-left" th:text="${product.price}">$10.99</td>
+                                <td class="text-left" th:text="${product.seller.name}"></td>
+                                <form method="post"
+                                      th:action="@{/buyer/cart/remove/{id}/{pid} (id = ${cart.id}, pid = ${product.id})}">
+                                    <td class="text-right">
+                                        <button type="submit" class="btn btn-danger">Remove</button>
+                                    </td>
+                                </form>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--SHIPPING METHOD END-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="copy-right">
+    <div class="container">
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email: mumexpress@gmail.com &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Phone: 641 451 85 69</p>
+        <p>Copyright ©2019 MUM Express. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All rights reserved.</p>
+    </div>
+</div>
+<!-- FOOTER -->
+
+
+</body>
+</html>

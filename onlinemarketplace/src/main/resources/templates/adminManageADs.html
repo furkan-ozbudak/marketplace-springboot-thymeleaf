@@ -1,0 +1,214 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Panel-Manage Ads.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="MUM Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!--<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">-->
+    <link th:href="@{/admin/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all">
+    <!-- Custom Theme files -->
+    <link th:href="@{/admin/css/style.css}" rel="stylesheet" type="text/css" media="all"/>
+    <!--js-->
+    <script th:src="@{/admin/js/jquery-2.1.1.min.js}"></script>
+    <!--icons-css-->
+    <link th:href="@{/admin/css/font-awesome.css}" rel="stylesheet">
+    <!--Google Fonts-->
+    <link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
+
+    <!--skycons-icons-->
+    <script th:src="@{/admin/js/skycons.js}"></script>
+    <!--//skycons-icons-->
+    <link th:href="@{https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="page-container">
+    <div class="left-content">
+        <div class="mother-grid-inner">
+            <!--header start here-->
+            <div class="header-main">
+                <div class="header-left">
+                    <div class="logo-name">
+                        <a th:href="@{/admin/users/SellerList}"><h1>Admin</h1>
+                            <!--<img id="logo" src="" alt="Logo"/>-->
+                        </a>
+                    </div>
+                    <!--search-box-->
+                    <!--//end-search-box-->
+                    <div class="clearfix"></div>
+                </div>
+                <div class="header-right">
+
+                    <!--notification menu end -->
+                    <div class="profile_details" align="right">
+                        <ul>
+                            <li class="dropdown profile_details_drop">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <div class="profile_img">
+                                        <span class="prfil-img"><span class="fa fa-user fa-lg"></span> </span>
+                                        <div class="user-name">
+                                            <p th:text="${Adminuser.name}">Malorum</p>
+                                            <span th:text="${Adminuser.type.name}">Administrator</span>
+                                        </div>
+                                        <i class="fa fa-angle-down lnr"></i>
+                                        <i class="fa fa-angle-up lnr"></i>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu drp-mnu">
+
+                                    <li><a th:href="@{/}"><i class="fa fa-globe"></i> Main page</a></li>
+                                    <form method="post" th:action="@{/logout}">
+                                        <input type="submit" class="btn btn-danger btn-sm" value="Logout" />
+                                    </form>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <!--heder end here-->
+            <!-- script-for sticky-nav -->
+            <script>
+                $(document).ready(function () {
+                    var navoffeset = $(".header-main").offset().top;
+                    $(window).scroll(function () {
+                        var scrollpos = $(window).scrollTop();
+                        if (scrollpos >= navoffeset) {
+                            $(".header-main").addClass("fixed");
+                        } else {
+                            $(".header-main").removeClass("fixed");
+                        }
+                    });
+
+                });
+            </script>
+            <!-- /script-for sticky-nav -->
+            <!--inner block start here-->
+            <div align="center">
+                <h1>Ads Maintenance Page</h1>
+            </div>
+            <div class="inner-block">
+                <!--mainpage chit-chating-->
+                <div class="chit-chat-layer1">
+                    <div class="col-md-12 chit-chat-layer1-left">
+                        <div class="work-progres">
+                            <div class="chit-chat-heading">
+                            </div>
+                            <div class="table-responsive">
+                                <div class="result" th:if="${added}" align="center"><h2>Seller Ads added
+                                    successfuly!</h2></div>
+                                <div class="result" th:if="${removed}" align="center"><h2>Seller Ads removed!</h2></div>
+
+                                <div align="center">
+                                    <form th:action="@{/admin/manage/ads/search}" method="post">
+                                        <input name="email" placeholder="User e-mail"/>
+                                        <input type="submit" value="Search User" class="btn btn-search-input">
+                                    </form>
+                                </div>
+                                <div align="center" th:if="${users}">
+                                    <div align="center" th:style="'width: 80%; padding: 10px;'"
+                                         th:each="user : ${users}">
+                                        <form th:action="@{/admin/ads/add/{id} (id = ${user.id})}" method="post">
+                                            <a th:href="@{/profile/{id} (id = ${user.id})}" target="_blank">
+                                                <span th:text="'ID: ' + ${user.id}"></span>
+                                                <span th:text="'Name: ' + ${user.name}"></span>
+                                                <span th:text="'Email: ' + ${user.email}"></span>
+                                            </a>
+                                            <input type="submit" value="Add Seller to Ads" class="btn btn-success"/>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div th:if="${notFound}" align="center">
+                                    <h2>User not found!</h2>
+                                </div>
+                                <hr th:style="'width: 80%;'"/>
+                                <div align="center">
+                                    <div th:each="ads: ${adsList}" align="center"
+                                         th:style="'width: 80%; border: 1px solid rgba(30,30,30,0.4); border-radius: 3px; padding: 30px;'">
+                                        <div align="left">
+                                            <form method="post" th:action="@{/admin/ads/remove/{id} (id = ${ads.id})}">
+                                                <span th:text="${ads.user.id}"></span> &nbsp;
+                                                <span th:text="${ads.user.name}"></span> &nbsp;
+                                                <span th:text="${ads.user.email}"></span> &nbsp;
+                                                <input type="submit" value="Remove Ads" class="btn btn-danger"/>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <!--main page chit chating end here-->
+
+            </div>
+            <!--inner block end here-->
+            <!--copy rights start here-->
+            <div class="copyrights">
+                <p>© 2019 MUM Express. All Rights Reserved | </p>
+            </div>
+            <!--COPY rights end here-->
+        </div>
+    </div>
+    <!--slider menu-->
+    <div class="sidebar-menu">
+        <div class="logo"><a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> <a href="#"> <span
+                id="logo"></span>
+            <!--<img id="logo" src="" alt="Logo"/>-->
+        </a></div>
+        <div class="menu">
+            <ul id="menu">
+                <li><a th:href="@{/admin/users/SellerList}"><i class="fa fa-home"></i><span>Home Page</span></a></li>
+                <li id="menu-home"><a th:href="@{/admin/users/manageSellers}"><i class="fa fa-user"></i><span>Manage Sellers</span></a>
+                </li>
+                <li class="menu-home"><a th:href="@{/admin/users/manageReviews}"><i class="fa fa-comment-o"></i><span>Manage Reviews</span></a>
+                </li>
+                <li class="menu-home"><a th:href="@{/admin/manage/ads}"><i class="fa fa-tachometer"></i><span>Post Ads</span></a></li>
+
+
+            </ul>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!--slide bar menu end here-->
+<script>
+    var toggle = true;
+
+    $(".sidebar-icon").click(function () {
+        if (toggle) {
+            $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+            $("#menu span").css({"position": "absolute"});
+        } else {
+            $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+            setTimeout(function () {
+                $("#menu span").css({"position": "relative"});
+            }, 400);
+        }
+        toggle = !toggle;
+    });
+</script>
+<!--scrolling js-->
+<script th:src="@{/admin/js/jquery.nicescroll.js}"></script>
+<script th:src="@{/admin/js/scripts.js}"></script>
+<!--//scrolling js-->
+<script th:src="@{/admin/js/bootstrap.js}"></script>
+<!-- mother grid end here-->
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang ="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/main.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/main.css}" href="../css/main.css" />
+</head>
+<body>
+<nav th:replace="fragments/beforeLoginNav :: nav">This nav content
+    is going to be replaced.</nav>
+
+<div class="container-fluid">
+    <div id="main-content" layout:fragment="main-content">
+        <h1>This is the Layout's main section</h1>
+        <p>This content will be replaced if the page using the layout
+            also defines a layout:fragment="content" segment.</p>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: footer"> </footer>
+</body>
+</html>
